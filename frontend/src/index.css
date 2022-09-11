@@ -17,3 +17,16 @@ a, a:hover, a:visited {
     color: unset;
     text-decoration: none;
 }
+
+.dsmeta-container {
+    width: 100%;
+    max-width: 900px;
+    margin: 0 auto;
+    /*macete para alinhar no centro*/
+}
+
+#sales {/*para usar um id se usa o  # ao invés do .*/
+
+    padding: 40px 10px;/* o primeiro numero é o espaçamento do topo
+                          e o segundo é os laterais*/
+}
