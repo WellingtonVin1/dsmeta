@@ -1,16 +1,25 @@
+import axios from "axios";
 import NotificationButton from '../NotificationButton';
 import './styles.css';
 import DatePicker from "react-datepicker";
 import "react-datepicker/dist/react-datepicker.css";
-import { useState } from 'react';
+import { useEffect, useState } from 'react';
 
 function SalesCard() {
 
-    const min = new Date(new Date().setDate(new Date().getDate() - 365));{/* Esse Comando seta uma data pegando a data de hoje - 365 dias*/ }
+    const min = new Date(new Date().setDate(new Date().getDate() - 365));{/* Esse Comando seta uma data pegando a data de hoje - 365 dias*/}
     const max = new Date();
 
     const [minDate, setMinDate] = useState(min);
     const [maxDate, setMaxDate] = useState(max);
+
+    useEffect(() => {
+        axios.get("http://localhost:8080/sales")
+            .then(response => {
+                console.log(response.data);
+            });   
+    }, []);
+
 
     return (
         <div className="dsmeta-card">
@@ -19,21 +28,20 @@ function SalesCard() {
                 <div className="dsmeta-form-control-container">
                         <DatePicker
                             selected={minDate}
-                            onChange={(date: Date) => setMinDate(date)}
+                            onChange={(date:Date) => setMinDate(date)}
                             className="dsmeta-form-control"
                             dateFormat="dd/MM/yyyy"
                         />
                 </div>
-                <div className="dsmeta-form-control-container" >
+                <div className="dsmeta-form-control-container">
                         <DatePicker
                             selected={maxDate}
-                            onChange={(date: Date) => setMaxDate(date)}
+                            onChange={(date:Date) => setMaxDate(date)}
                             className="dsmeta-form-control"
                             dateFormat="dd/MM/yyyy"
                         />
                 </div>
             </div>
-
             <div>
                 <table className="dsmeta-sales-table"> {/*<!--Abre a Tabela--> */}
                     <thead> {/*<!--Esse é o cabeçalho da tabela -->*/}
@@ -57,9 +65,8 @@ function SalesCard() {
                             <td>R$ 55300.00</td>
                             <td>
                                 <div className="dsmeta-red-btn-container">
-                                    <NotificationButton />
+                                    <NotificationButton/>
                                 </div>
-
                             </td>
                         </tr>
                         <tr>
@@ -71,9 +78,8 @@ function SalesCard() {
                             <td>R$ 55300.00</td>
                             <td>
                                 <div className="dsmeta-red-btn-container">
-                                    <NotificationButton />
+                                    <NotificationButton/>
                                 </div>
-
                             </td>
                         </tr>
                         <tr>
@@ -85,15 +91,13 @@ function SalesCard() {
                             <td>R$ 55300.00</td>
                             <td>
                                 <div className="dsmeta-red-btn-container">
-                                    <NotificationButton />
+                                    <NotificationButton/>
                                 </div>
-
                             </td>
                         </tr>
                     </tbody>
                 </table>
             </div>
-
         </div>
     )
 }
